@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
+// create schema
+
 const TaskSchema = new Schema(
     {
         title: {
