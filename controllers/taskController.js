@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const taskModel = require("../models/TaskModel");
+const { default: axios } = require("axios");
 
 // To create a Task - POST
 const createTask = async (req, res) => {
@@ -14,9 +15,24 @@ const createTask = async (req, res) => {
 };
 
 // To get all Taks - GET
+// const getTasks = async (req, res) => {
+//     try {
+//         const tasks = await taskModel.find({});
+//         res.status(200).json(tasks);
+//     } catch (e) {
+//         res.status(400).json({ error: e.message });
+//     }
+// };
+
 const getTasks = async (req, res) => {
     try {
-        const tasks = await taskModel.find({});
+        // Fetch data from the external URL
+        const response = await axios.get("https://dummyjson.com/products");
+
+        // Extract the data from the response
+        const tasks = response.data;
+
+        // Send the data as the API response
         res.status(200).json(tasks);
     } catch (e) {
         res.status(400).json({ error: e.message });
