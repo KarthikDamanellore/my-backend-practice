@@ -1,23 +1,22 @@
 const mongoose = require("mongoose");
-
 const Schema = mongoose.Schema;
 
-// create schema
-
-const TaskSchema = new Schema(
+const EventSchema = new Schema(
     {
-        title: {
+        eventName: {
             type: String,
             require: true,
         },
-        description: {
+        userName: {
             type: String,
+            require: true,
         },
         image: {
             type: String,
+            require: true,
         },
     },
     { timestamps: true }
 );
 
-module.exports = mongoose.model("Task", TaskSchema);
+module.exports = mongoose.model("Event", EventSchema);

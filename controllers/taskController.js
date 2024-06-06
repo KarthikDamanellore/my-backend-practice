@@ -4,10 +4,10 @@ const { default: axios } = require("axios");
 
 // To create a Task - POST
 const createTask = async (req, res) => {
-    const { title, description } = req.body;
+    const { title, description, image } = req.body;
 
     try {
-        const task = await taskModel.create({ title, description });
+        const task = await taskModel.create({ title, description, image });
         res.status(200).json(task);
     } catch (e) {
         res.status(400).json({ error: e.message });
@@ -15,24 +15,9 @@ const createTask = async (req, res) => {
 };
 
 // To get all Taks - GET
-// const getTasks = async (req, res) => {
-//     try {
-//         const tasks = await taskModel.find({});
-//         res.status(200).json(tasks);
-//     } catch (e) {
-//         res.status(400).json({ error: e.message });
-//     }
-// };
-
 const getTasks = async (req, res) => {
     try {
-        // Fetch data from the external URL
-        const response = await axios.get("https://dummyjson.com/products");
-
-        // Extract the data from the response
-        const tasks = response.data;
-
-        // Send the data as the API response
+        const tasks = await taskModel.find({});
         res.status(200).json(tasks);
     } catch (e) {
         res.status(400).json({ error: e.message });
