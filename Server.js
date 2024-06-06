@@ -3,9 +3,6 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const app = express();
 const taskRoutes = require("./routes/taskRoute");
-const swaggerJSDoc = require("swagger-jsdoc");
-const swaggerDefinition = require("./swaggerDefinition/swaggerDefinition");
-const swaggerUi = require("swagger-ui-express");
 
 //Middleware
 app.use((req, res, next) => {
@@ -13,19 +10,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// swagger
-const options = {
-    swaggerDefinition,
-    apis: ["./routes/taskRoute.js"], // Use the path to your route files
-};
-
-const swaggerSpec = swaggerJSDoc(options);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
 app.use(express.json());
-// app.get("/", (req, res) => {
-//   res.send("Hello world");
-// });
 
 // DB connection
 mongoose
