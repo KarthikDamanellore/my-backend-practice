@@ -3,6 +3,7 @@ require("dotenv").config();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
+const bodyParser = require("body-parser");
 const taskRoutes = require("./routes/taskRoute");
 const userRoutes = require("./routes/userRoute");
 const eventRoutes = require("./routes/eventRoute");
@@ -16,7 +17,10 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(express.json());
+// app.use(express.json());
+// Use bodyParser to handle larger payloads
+app.use(bodyParser.json({ limit: "50mb" }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
 // DB connection
 mongoose

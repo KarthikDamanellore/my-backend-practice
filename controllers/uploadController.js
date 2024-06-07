@@ -2,11 +2,10 @@ const mongoose = require("mongoose");
 const uploadModel = require("../models/uploadModel");
 
 const uploadFiles = async (req, res) => {
-    const { myFile } = req.body;
+    const { myFiles } = req.body;
     try {
-        const files = await uploadModel.create({ myFile });
-        await files.save();
-        res.status(200).json({ msg: "image uploaded", data: files });
+        const files = await uploadModel.create({ myFiles });
+        res.status(200).json({ msg: "Images uploaded", data: files.myFiles });
     } catch (e) {
         res.status(400).json({ error: e.message });
     }
