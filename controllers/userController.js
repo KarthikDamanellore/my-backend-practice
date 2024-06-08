@@ -5,6 +5,27 @@ const RegisterUser = async (req, res) => {
     const { name, email, password } = req.body;
 
     try {
+        // Check if the email already exists
+        const existingEmailUser = await UserModel.findOne({ email });
+        if (existingEmailUser) {
+            return res.status(400).json({
+                type: "error",
+                message: "Email already in use. Please use a different email.",
+                tag: "email",
+            });
+        }
+
+        // Check if the username already exists
+        const existingNameUser = await UserModel.findOne({ name });
+        if (existingNameUser) {
+            return res.status(400).json({
+                type: "error",
+                message:
+                    "Username already in use. Please use a different username.",
+                tag: "name",
+            });
+        }
+
         const userRegister = await UserModel.create({
             name,
             email,
