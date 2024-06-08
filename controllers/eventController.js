@@ -4,14 +4,13 @@ const UserModel = require("../models/UserModel");
 
 const createEvent = async (req, res) => {
     const { eventName, userName, image } = req.body;
-    console.log("111", res);
 
     try {
         const user = await UserModel.findOne({ name: userName });
         if (!user) {
             return res.status(400).json({
                 type: "error",
-                message: "User does not exist. event creation failed",
+                message: "User does not exist. Event creation failed",
                 tag: "userName",
             });
         }

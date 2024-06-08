@@ -5,15 +5,15 @@ const EventSchema = new Schema(
     {
         eventName: {
             type: String,
-            require: true,
+            required: true,
         },
         userName: {
             type: String,
-            require: true,
+            required: true,
         },
         image: {
-            type: String,
-            require: true,
+            type: [String],
+            required: true,
         },
     },
     { timestamps: true }
